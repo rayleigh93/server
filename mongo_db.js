@@ -42,7 +42,7 @@ exports.initMongoDB = function() {
 
                     Promise.all([promiseDeleteListUser,promiseDeleteListGame]).then(function(val){
                                   index.socketIndex();
-                                  console.log("Socket io Crée");
+                                 
                                                                         });
 
              }
@@ -98,20 +98,45 @@ exports.deleteUserToDB = function(idUser) {
 exports.createGameToDB = function(idUserOne,idUserTwo){
 
     var newGame = new mongoModel.GameModel
-    ({"arrayCase":
-    [{"typeCase":"vide"},
-     {"typeCase":"vide"},
-     {"typeCase":"green"}
-    ,{"typeCase":"vide"},
-      {"typeCase":"vide"},
-         {"typeCase":"red"},
-         {"typeCase":"vide"},
-      {"typeCase":"vide"},
-         {"typeCase":"red"}],
-
-"idUserTwo":idUserTwo,
-"idUserOne":idUserOne,
-"playerTurn":idUserTwo});
+    ({"playerTurn":idUserTwo,
+    "tableauGame":[{"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0}],
+    
+    "userIdOne":idUserOne,
+    "userIdTwo":idUserTwo
+    ,"userNameOne":"userNameOne"
+    ,"userNameTwo":"userNameTwo"}
+    );
 
 newGame.save(function(err,user){
     if (err) return console.error(err);
@@ -134,22 +159,28 @@ exports.sendGameToUsers = function(socket,io){
 
             data.forEach(function(element) {
 
-                const gameToUserPlayer = {tableauGame:element.arrayCase,
-                    playerTurn:true}
+                const gameToUserPlayer = {tableauGame:element.tableauGame,
+                    playerTurn:true,
+                    userNameOne:"userNameOne",
+                    userNameTwo:"userNameTwo"}
     
-                    const gameToUserNotPlayer = {tableauGame:element.arrayCase,
-                        playerTurn:false}
+                    const gameToUserNotPlayer = {tableauGame:element.tableauGame,
+                        playerTurn:false,
+                        userNameOne:"userNameOne",
+                        userNameTwo:"userNameTwo"}
 
-                if(element.playerTurn === element.idUserTwo )
+                        console.log(element.userIdOne);
+
+                if(element.playerTurn === element.userIdTwo )
                 {
-                    io.to(`${element.idUserOne}`).emit('playerplay',  gameToUserNotPlayer );
-                    io.to(`${element.idUserTwo}`).emit('playerplay',  gameToUserPlayer);        
+                    io.to(`${element.userIdOne}`).emit('playerplay',  gameToUserNotPlayer );
+                    io.to(`${element.userIdTwo}`).emit('playerplay',  gameToUserPlayer);        
                 }
 
-                else if(element.playerTurn === element.idUserOne)
+                else if(element.playerTurn === element.userIdOne)
                 {
-                    io.to(`${element.idUserOne}`).emit('playerplay',  gameToUserPlayer );
-                    io.to(`${element.idUserTwo}`).emit('playerplay',  gameToUserNotPlayer);     
+                    io.to(`${element.userIdOne}`).emit('playerplay',  gameToUserPlayer );
+                    io.to(`${element.userIdTwo}`).emit('playerplay',  gameToUserNotPlayer);     
                 }
     
             });

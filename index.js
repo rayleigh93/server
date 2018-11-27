@@ -22,6 +22,7 @@ searchGame.arrayUserSearchGame;
 
 // Fonction qui s'occupe de toutes les fonctions provenant de SocketIO
 const socketio = function(){
+    console.log("Socket io Crée");
 // User se connecte : On emit("connect") automatiquement.
 io.on('connection', (socket) => {
 

@@ -32,21 +32,44 @@ exports.CollectionGameString = CollectionGame;
 
 
 // Game Schema qui correpond à la structure d'une partie
-var GameSchema = new mongoose.Schema({
-    "arrayCase":
-            [{"typeCase":String},
-             {"typeCase":String},
-             {"typeCase":String}
-            ,{"typeCase":String},
-              {"typeCase":String},
-                 {"typeCase":String},
-                 {"typeCase":String},
-              {"typeCase":String},
-                 {"typeCase":String}],
-        "idUserTwo":String,
-        "idUserOne":String,
-        "playerTurn":String
-},{ collection: CollectionGame});
+var GameSchema = new mongoose.Schema({"playerTurn":String,
+"tableauGame":[{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},
+{"typeCase":String,"typeTiles":Number},{"typeCase":String,"typeTiles":Number},],
+"userIdOne":String,
+"userIdTwo":String
+,"userNameOne":String
+,"userNameTwo":String}
+,{ collection: CollectionGame});
 
 var GameModel = mongoose.model('gameOnline',GameSchema);
 exports.GameModel = GameModel;
