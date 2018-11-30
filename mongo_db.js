@@ -99,8 +99,8 @@ exports.createGameToDB = function(idUserOne,idUserTwo){
 
     var newGame = new mongoModel.GameModel
     ({"playerTurn":idUserTwo,
-    "tableauGame":[{"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
-    {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
+    "tableauGame":[{"typeCase":"vide","typeTiles":1},{"typeCase":"yellow","typeTiles":2},
+    {"typeCase":"vide","typeTiles":3},{"typeCase":"blue","typeTiles":4},
     {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
     {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
     {"typeCase":"vide","typeTiles":0},{"typeCase":"vide","typeTiles":0},
@@ -169,10 +169,12 @@ exports.sendGameToUsers = function(socket,io){
                         userNameOne:"userNameOne",
                         userNameTwo:"userNameTwo"}
 
-                        console.log(element.userIdOne);
-
+             
                 if(element.playerTurn === element.userIdTwo )
                 {
+                    gameToUserNotPlayer.color ="yellow";
+                    gameToUserPlayer.color="blue";
+                    console.log(gameToUserPlayer);
                     io.to(`${element.userIdOne}`).emit('playerplay',  gameToUserNotPlayer );
                     io.to(`${element.userIdTwo}`).emit('playerplay',  gameToUserPlayer);        
                 }
