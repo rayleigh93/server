@@ -33,8 +33,15 @@ exports.onSendActionFromUser = function(socket,io){
     socket.on(EVENT_ACTION_FROM_USER, function(position) {
 
             //On modifie le fichier Json
-            mongoDB.modifyGameUser(socket.id,position);
+            mongoDB.checkGameUser(socket.id,position);
 
         })
 
 }
+
+
+//exports.
+
+
+
+

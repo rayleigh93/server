@@ -11,7 +11,7 @@ const searchGame = require('./search_game');
 const manageGame = require('./manage_game');
 
 
-const INTERVAL_SEND_GAME = 1000;
+const INTERVAL_SEND_GAME = 200;
 
 
 // Initialisation à la connection BDD

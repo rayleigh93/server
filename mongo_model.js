@@ -68,7 +68,9 @@ var GameSchema = new mongoose.Schema({"playerTurn":String,
 "userIdOne":String,
 "userIdTwo":String
 ,"userNameOne":String
-,"userNameTwo":String}
+,"userNameTwo":String
+,"colorBlue":String
+,"colorYellow":String}
 ,{ collection: CollectionGame});
 
 var GameModel = mongoose.model('gameOnline',GameSchema);
